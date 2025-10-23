@@ -68,16 +68,29 @@ class Config:
     top_k_exog_check: int = 50
 
     # Modell-Grid
+    #param_grid: Dict = field(default_factory=lambda: {
+    #    "max_depth": [8, 10, 12, 14, 16],
+    #    "min_samples_leaf": [0.01, 0.02, 0.03],
+    #    "min_samples_split": [0.02, 0.05, 0.1],
+    #    "max_features": [None, "sqrt"],
+    #    "criterion": ["squared_error"],
+    #    "ccp_alpha": [0.0, 5e-4],
+    #    "min_impurity_decrease": [0.0, 1e-4],
+    #})
+
+
+    # Modell-Grid
     param_grid: Dict = field(default_factory=lambda: {
-        "max_depth": [8, 10, 12, 14, 16],
-        "min_samples_leaf": [0.01, 0.02, 0.03],
-        "min_samples_split": [0.02, 0.05, 0.1],
+        "max_depth": [8, 10],
+        "min_samples_leaf": [0.01],
+        "min_samples_split": [0.02],
         "max_features": [None, "sqrt"],
         "criterion": ["squared_error"],
         "ccp_alpha": [0.0, 5e-4],
-        "min_impurity_decrease": [0.0, 1e-4],
+        "min_impurity_decrease": [0.0],
     })
 
+    
     # Deterministische Features
     add_trend_features: bool = True
     trend_degree: int = 1
@@ -2081,3 +2094,4 @@ if __name__ == "__main__":
     }
     res_fc = sa.forecast(H=4, scenario_future=scenario_future, persist=True)
     print(pd.DataFrame(res_fc["table"]).to_string(index=False))
+
